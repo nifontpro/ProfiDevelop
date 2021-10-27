@@ -16,9 +16,9 @@ class MainPresenterImpl<T : AppState, V : BaseView>(
         RepositoryImplementation(DataSourceRemote()),
         RepositoryImplementation(DataSourceLocal())
     ),
-    protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     // Мы можем обойтись и без SchedulerProvider, но он вам пригодится для тестирования приложения  -- мы будем рассматривать его на следующем курсе более подробно
-    protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
+    private val schedulerProvider: SchedulerProvider = SchedulerProvider()
 ) : Presenter<T, V> {
     // Ссылка на View, никакого контекста
     private var currentView: V? = null
