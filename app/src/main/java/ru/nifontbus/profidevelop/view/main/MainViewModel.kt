@@ -8,7 +8,10 @@ import ru.nifontbus.profidevelop.utils.parseSearchResults
 import ru.nifontbus.profidevelop.view.base.BaseViewModel
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel @Inject constructor(
+    private val interactor: MainInteractor,
+//    savedStateHandle: SavedStateHandle !!! -> Не внедряется
+) :
     BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
