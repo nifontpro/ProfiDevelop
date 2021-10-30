@@ -15,7 +15,7 @@ import ru.nifontbus.profidevelop.view.base.BaseActivity
 import ru.nifontbus.profidevelop.view.main.adapter.MainAdapter
 import javax.inject.Inject
 
-class MainActivity : BaseActivity<AppState>() {
+class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
 
