@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.AndroidInjection
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityMainBinding
 import ru.nifontbus.profidevelop.model.data.AppState
 import ru.nifontbus.profidevelop.model.data.DataModel
 import ru.nifontbus.profidevelop.view.base.BaseActivity
 import ru.nifontbus.profidevelop.view.main.adapter.MainAdapter
+import javax.inject.Inject
 
 class MainActivity : BaseActivity<AppState>() {
 
@@ -27,22 +28,45 @@ class MainActivity : BaseActivity<AppState>() {
             }
         }
 
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
-    }
+    // Внедряем фабрику для создания ViewModel
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val observer = Observer<AppState> { renderData(it) }
+    override lateinit var viewModel: MainViewModel
+
+/*    override val viewModel: MainViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+    }*/
+
+/*    private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
+        object : SearchDialogFragment.OnSearchClickListener {
+            override fun onClick(searchWord: String) {
+                isNetworkAvailable = isOnline(applicationContext)
+                if (isNetworkAvailable) {
+                    viewModel.getData(searchWord, isNetworkAvailable)
+                } else {
+                    showNoInternetConnectionDialog()
+                }
+            }
+        }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = viewModelFactory.create(MainViewModel::class.java)
+        viewModel.subscribe().observe(this@MainActivity, { renderData(it) })
+
+
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    viewModel.getData(searchWord, true).observe(this@MainActivity, observer)
+                    viewModel.getData(searchWord, true)
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
@@ -88,7 +112,7 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            viewModel.getData("hi", true).observe(this, observer)
+            viewModel.getData("hi", true)
         }
     }
 

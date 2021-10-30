@@ -1,44 +1,43 @@
 package ru.nifontbus.profidevelop.view.main
 
 import androidx.lifecycle.LiveData
+import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.datasource.DataSourceLocal
-import ru.nifontbus.profidevelop.model.datasource.DataSourceRemote
-import ru.nifontbus.profidevelop.model.repository.RepositoryImplementation
-import ru.nifontbus.profidevelop.use_cases.MainInteractor
+import ru.nifontbus.profidevelop.utils.parseSearchResults
 import ru.nifontbus.profidevelop.view.base.BaseViewModel
+import javax.inject.Inject
 
-class MainViewModel(
-    private val interactor: MainInteractor = MainInteractor(
-        RepositoryImplementation(DataSourceRemote()),
-        RepositoryImplementation(DataSourceLocal())
-    )
-) : BaseViewModel<AppState>() {
-    // В этой переменной хранится последнее состояние Activity
+class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+    BaseViewModel<AppState>() {
+
     private var appState: AppState? = null
-    // Переопределяем метод из BaseViewModel
-    override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
+
+    fun subscribe(): LiveData<AppState> {
+        return liveDataForViewToObserve
+    }
+
+    override fun getData(word: String, isOnline: Boolean) {
         compositeDisposable.add(
             interactor.getData(word, isOnline)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .doOnSubscribe{ liveDataForViewToObserve.value = AppState.Loading(null) }
-
+                .doOnSubscribe(doOnSubscribe())
                 .subscribeWith(getObserver())
         )
-        return super.getData(word, isOnline)
     }
+
+    private fun doOnSubscribe(): (Disposable) -> Unit =
+        { liveDataForViewToObserve.value = AppState.Loading(null) }
 
     private fun getObserver(): DisposableObserver<AppState> {
         return object : DisposableObserver<AppState>() {
-            // Данные успешно загружены; сохраняем их и передаем во View (через
-            // LiveData). View сама разберётся, как их отображать
+
             override fun onNext(state: AppState) {
-                appState = state
-                liveDataForViewToObserve.value = state
+                appState = parseSearchResults(state)
+                liveDataForViewToObserve.value = appState
             }
-            // В случае ошибки передаём её в Activity таким же образом через LiveData
+
             override fun onError(e: Throwable) {
                 liveDataForViewToObserve.value = AppState.Error(e)
             }
