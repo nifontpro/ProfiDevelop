@@ -1,10 +1,10 @@
-package ru.nifontbus.profidevelop.view.main
+package ru.nifontbus.profidevelop.use_cases
 
 import io.reactivex.Observable
 import ru.nifontbus.profidevelop.model.data.AppState
 import ru.nifontbus.profidevelop.model.data.DataModel
 import ru.nifontbus.profidevelop.model.repository.Repository
-import ru.nifontbus.profidevelop.presenter.Interactor
+import ru.nifontbus.profidevelop.use_cases.Interactor
 
 class MainInteractor(
     // Снабжаем интерактор репозиторием для получения локальных или внешних
