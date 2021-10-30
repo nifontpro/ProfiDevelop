@@ -4,21 +4,23 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.AndroidInjection
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityMainBinding
 import ru.nifontbus.profidevelop.model.data.AppState
 import ru.nifontbus.profidevelop.model.data.DataModel
-import ru.nifontbus.profidevelop.presenter.Presenter
 import ru.nifontbus.profidevelop.view.base.BaseActivity
-import ru.nifontbus.profidevelop.view.base.BaseView
 import ru.nifontbus.profidevelop.view.main.adapter.MainAdapter
+import javax.inject.Inject
 
-class MainActivity : BaseActivity<AppState>() {
+class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainAdapter? = null
+
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
@@ -26,20 +28,45 @@ class MainActivity : BaseActivity<AppState>() {
             }
         }
 
-    override fun createPresenter(): Presenter<AppState, BaseView> {
-        return MainPresenterImpl()
-    }
+    // Внедряем фабрику для создания ViewModel
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override lateinit var viewModel: MainViewModel
+
+/*    override val viewModel: MainViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+    }*/
+
+/*    private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
+        object : SearchDialogFragment.OnSearchClickListener {
+            override fun onClick(searchWord: String) {
+                isNetworkAvailable = isOnline(applicationContext)
+                if (isNetworkAvailable) {
+                    viewModel.getData(searchWord, isNetworkAvailable)
+                } else {
+                    showNoInternetConnectionDialog()
+                }
+            }
+        }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = viewModelFactory.create(MainViewModel::class.java)
+        viewModel.subscribe().observe(this@MainActivity, { renderData(it) })
+
+
         binding.searchFab.setOnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
+                    viewModel.getData(searchWord, true)
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
@@ -85,7 +112,7 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.getData("hi", true)
+            viewModel.getData("hi", true)
         }
     }
 
