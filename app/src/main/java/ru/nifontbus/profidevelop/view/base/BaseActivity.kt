@@ -11,7 +11,7 @@ import ru.nifontbus.profidevelop.utils.network.isOnline
 
 abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity() {
 
-    abstract val viewModel: BaseViewModel<T>
+    abstract val model: BaseViewModel<T>
 
     protected var isNetworkAvailable: Boolean = false
 
@@ -28,15 +28,16 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
         }
     }
 
-    private fun showNoInternetConnectionDialog() {
+    protected fun showNoInternetConnectionDialog() {
         showAlertDialog(
             getString(R.string.dialog_title_device_is_offline),
             getString(R.string.dialog_message_device_is_offline)
         )
     }
 
-    private fun showAlertDialog(title: String?, message: String?) {
-        AlertDialogFragment.newInstance(title, message).show(supportFragmentManager, DIALOG_FRAGMENT_TAG)
+    protected fun showAlertDialog(title: String?, message: String?) {
+        AlertDialogFragment.newInstance(title, message)
+            .show(supportFragmentManager, DIALOG_FRAGMENT_TAG)
     }
 
     private fun isDialogNull(): Boolean {

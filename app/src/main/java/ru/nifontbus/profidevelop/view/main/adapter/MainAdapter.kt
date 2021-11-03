@@ -10,10 +10,10 @@ import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.model.data.DataModel
 
 class MainAdapter(
-    private var onListItemClickListener: OnListItemClickListener,
-    private var data: List<DataModel>
-) :
-    RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {
+    private var onListItemClickListener: OnListItemClickListener
+) : RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {
+
+    private var data: List<DataModel> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<DataModel>) {
@@ -29,7 +29,7 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
