@@ -1,8 +1,10 @@
 package ru.nifontbus.profidevelop.application
 
 import android.app.Application
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.nifontbus.profidevelop.di.application
+import ru.nifontbus.profidevelop.di.historyScreen
 import ru.nifontbus.profidevelop.di.mainScreen
 
 class TranslatorApp : Application() {
@@ -10,7 +12,8 @@ class TranslatorApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            modules(listOf(application, mainScreen))
+            androidContext(applicationContext)
+            modules(listOf(application, mainScreen, historyScreen))
         }
     }
 }
