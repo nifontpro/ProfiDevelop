@@ -1,20 +1,18 @@
-package ru.nifontbus.profidevelop.view.main.adapter
+package ru.nifontbus.profidevelop.view.history
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.model.data.DataModel
 
-class MainAdapter(private var onListItemClickListener: OnListItemClickListener) :
-    RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {
+class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<DataModel> = arrayListOf()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<DataModel>) {
         this.data = data
         notifyDataSetChanged()
@@ -23,7 +21,7 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_main_recyclerview_item, parent, false) as View
+                .inflate(R.layout.activity_history_recyclerview_item, parent, false) as View
         )
     }
 
@@ -39,19 +37,13 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
 
         fun bind(data: DataModel) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                itemView.findViewById<TextView>(R.id.header_textview_recycler_item).text = data.text
-                itemView.findViewById<TextView>(R.id.description_textview_recycler_item).text =
-                    data.meanings?.get(0)?.translation?.translation
-                itemView.setOnClickListener { openInNewWindow(data) }
+                itemView.findViewById<TextView>(R.id.header_history_textview_recycler_item).text =
+                    data.text
+                itemView.setOnClickListener {
+                    Toast.makeText(itemView.context, "on click: ${data.text}", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
-    }
-
-    private fun openInNewWindow(listItemData: DataModel) {
-        onListItemClickListener.onItemClick(listItemData)
-    }
-
-    interface OnListItemClickListener {
-        fun onItemClick(data: DataModel)
     }
 }
