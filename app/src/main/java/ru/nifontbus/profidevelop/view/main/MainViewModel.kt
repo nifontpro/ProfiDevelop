@@ -2,14 +2,13 @@ package ru.nifontbus.profidevelop.view.main
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.nifontbus.model.data.AppState
 import ru.nifontbus.utils.parseOnlineSearchResults
-import ru.nifontbus.profidevelop.view.base.BaseViewModel
+import ru.nifontbus.core.viewmodel.BaseViewModel
 
 class MainViewModel(private val interactor: MainInteractor) :
-    BaseViewModel<AppState>() {
+    ru.nifontbus.core.viewmodel.BaseViewModel<AppState>() {
 
     private val liveDataForViewToObserve: LiveData<AppState> = _mutableLiveData
 

@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.view.base
+package ru.nifontbus.core.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

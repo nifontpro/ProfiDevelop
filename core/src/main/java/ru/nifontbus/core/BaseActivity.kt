@@ -1,23 +1,21 @@
-package ru.nifontbus.profidevelop.view.base
+package ru.nifontbus.core
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import geekbrains.ru.translator.utils.ui.AlertDialogFragment
-import ru.nifontbus.profidevelop.R
-import ru.nifontbus.profidevelop.databinding.LoadingLayoutBinding
+import ru.nifontbus.core.databinding.LoadingLayoutBinding
 import ru.nifontbus.model.data.AppState
 import ru.nifontbus.model.data.DataModel
-import ru.nifontbus.profidevelop.use_cases.Interactor
 import ru.nifontbus.utils.network.isOnline
 
 private const val DIALOG_FRAGMENT_TAG = "74a54328-5d62-46bf-ab6b-cbf5d8c79522"
 
-abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity() {
+abstract class BaseActivity<T : AppState, I : ru.nifontbus.core.viewmodel.Interactor<T>> : AppCompatActivity() {
 
     private lateinit var binding: LoadingLayoutBinding
-    abstract val model: BaseViewModel<T>
+    abstract val model: ru.nifontbus.core.viewmodel.BaseViewModel<T>
     protected var isNetworkAvailable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -55,7 +53,7 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
-                    binding.progressBarHorizontal.progress = appState.progress
+                    binding.progressBarHorizontal.progress = appState.progress!!
                 } else {
                     binding.progressBarHorizontal.visibility = View.GONE
                     binding.progressBarRound.visibility = View.VISIBLE
@@ -68,7 +66,7 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
         }
     }
 
-    protected fun showNoInternetConnectionDialog() {
+    private fun showNoInternetConnectionDialog() {
         showAlertDialog(
             getString(R.string.dialog_title_device_is_offline),
             getString(R.string.dialog_message_device_is_offline)
