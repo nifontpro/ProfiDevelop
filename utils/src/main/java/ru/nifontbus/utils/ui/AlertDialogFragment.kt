@@ -3,8 +3,8 @@ package geekbrains.ru.translator.utils.ui
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialogFragment
-import ru.nifontbus.profidevelop.utils.ui.getAlertDialog
-import ru.nifontbus.profidevelop.utils.ui.getStubAlertDialog
+import ru.nifontbus.utils.ui.getAlertDialog
+import ru.nifontbus.utils.ui.getStubAlertDialog
 
 class AlertDialogFragment : AppCompatDialogFragment() {
 

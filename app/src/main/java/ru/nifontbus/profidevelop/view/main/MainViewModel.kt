@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.utils.parseOnlineSearchResults
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.utils.parseOnlineSearchResults
 import ru.nifontbus.profidevelop.view.base.BaseViewModel
 
 class MainViewModel(private val interactor: MainInteractor) :

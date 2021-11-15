@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import geekbrains.ru.translator.utils.ui.AlertDialogFragment
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.LoadingLayoutBinding
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.use_cases.Interactor
-import ru.nifontbus.profidevelop.utils.network.isOnline
+import ru.nifontbus.utils.network.isOnline
 
 private const val DIALOG_FRAGMENT_TAG = "74a54328-5d62-46bf-ab6b-cbf5d8c79522"
 

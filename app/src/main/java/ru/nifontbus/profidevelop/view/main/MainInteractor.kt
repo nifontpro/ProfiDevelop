@@ -1,7 +1,7 @@
 package ru.nifontbus.profidevelop.view.main
 
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.model.repository.Repository
 import ru.nifontbus.profidevelop.model.repository.RepositoryLocal
 import ru.nifontbus.profidevelop.use_cases.Interactor

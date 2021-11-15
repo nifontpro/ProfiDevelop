@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.model.data
+package ru.nifontbus.model.data
 
 sealed class AppState {
 

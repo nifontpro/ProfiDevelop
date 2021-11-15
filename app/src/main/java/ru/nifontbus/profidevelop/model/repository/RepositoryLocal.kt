@@ -1,6 +1,6 @@
 package ru.nifontbus.profidevelop.model.repository
 
-import ru.nifontbus.profidevelop.model.data.AppState
+import ru.nifontbus.model.data.AppState
 
 interface RepositoryLocal<T> : Repository<T> {
 

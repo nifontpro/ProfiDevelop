@@ -12,10 +12,10 @@ object Releases {
 
 object Modules {
     const val app = ":app"
- /*   const val core = ":core"
+    const val core = ":core"
     const val model = ":model"
     const val repository = ":repository"
-    const val utils = ":utils"*/
+    const val utils = ":utils"
 
     //Features
     const val historyScreen = ":historyScreen"
@@ -98,44 +98,6 @@ object Room {
 
 object TestImpl {
     const val junit = "junit:junit:"
-    const val testExt = "androidx.test.ext:junit:${Versions.testExt}"
+    const val runner = "androidx.test.ext:junit:${Versions.testExt}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 }
-
-/*
-implementation 'androidx.core:core-ktx:1.7.0'
-implementation 'androidx.appcompat:appcompat:1.3.1'
-implementation 'com.google.android.material:material:1.4.0'
-implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-testImplementation 'junit:junit:'
-androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-// Retrofit 2
-def retrofit_ver = '2.9.0'
-implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
-implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
-implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
-implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
-
-//Koin
-def koin_version = "3.1.3"
-implementation "io.insert-koin:koin-android:$koin_version"
-implementation "io.insert-koin:koin-android-compat:$koin_version"
-implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
-implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
-
-// Coroutines
-def coroutines_ver = '1.5.2'
-implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_ver"
-implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_ver"
-
-//Room
-def room_version = "2.3.0"
-implementation "androidx.room:room-runtime:$room_version"
-kapt "androidx.room:room-compiler:$room_version"
-implementation "androidx.room:room-ktx:$room_version"
-
-//Coil
-implementation 'io.coil-kt:coil:1.4.0' */

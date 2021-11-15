@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.utils.ui
+package ru.nifontbus.utils.ui
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog

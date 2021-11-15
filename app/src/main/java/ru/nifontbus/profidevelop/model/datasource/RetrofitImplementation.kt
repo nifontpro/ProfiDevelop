@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.DataModel
 
 class RetrofitImplementation : DataSource<List<DataModel>> {
 

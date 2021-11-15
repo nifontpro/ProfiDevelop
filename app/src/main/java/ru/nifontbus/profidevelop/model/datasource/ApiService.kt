@@ -3,7 +3,7 @@ package ru.nifontbus.profidevelop.model.datasource
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.DataModel
 
 interface ApiService {
 

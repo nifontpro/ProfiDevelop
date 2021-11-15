@@ -2,17 +2,16 @@ package ru.nifontbus.profidevelop.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityMainBinding
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
-import ru.nifontbus.profidevelop.utils.convertMeaningsToString
-import ru.nifontbus.profidevelop.utils.network.isOnline
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
+import ru.nifontbus.utils.convertMeaningsToString
+import ru.nifontbus.utils.network.isOnline
 import ru.nifontbus.profidevelop.view.base.BaseActivity
 import ru.nifontbus.profidevelop.view.descriptionscreen.DescriptionActivity
 import ru.nifontbus.profidevelop.view.history.HistoryActivity

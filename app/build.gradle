@@ -5,40 +5,8 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-/*android {
-    compileSdk Config.compile_sdk
-
-    defaultConfig {
-        applicationId Config.application_id
-        minSdk Config.min_sdk
-        targetSdk Config.target_sdk
-        versionCode Releases.version_code
-        versionName Releases.version_name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    buildFeatures {
-        viewBinding true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}*/
-
 dependencies {
+    implementation project(Modules.model)
 
     implementation Kotlin.core
     implementation Design.appcompat
@@ -47,7 +15,7 @@ dependencies {
     implementation Design.swiperefreshLayout
 
     testImplementation TestImpl.junit
-    androidTestImplementation TestImpl.testExt
+    androidTestImplementation TestImpl.runner
     androidTestImplementation TestImpl.espresso
 
     // Retrofit 2

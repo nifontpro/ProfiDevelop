@@ -1,10 +1,10 @@
 package ru.nifontbus.profidevelop.model.datasource
 
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.room.HistoryDao
-import ru.nifontbus.profidevelop.utils.convertDataModelSuccessToEntity
-import ru.nifontbus.profidevelop.utils.mapHistoryEntityToSearchResult
+import ru.nifontbus.utils.convertDataModelSuccessToEntity
+import ru.nifontbus.utils.mapHistoryEntityToSearchResult
 
 class RoomDataBaseImplementation(private val historyDao: HistoryDao) :
     DataSourceLocal<List<DataModel>> {

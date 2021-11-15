@@ -1,7 +1,7 @@
 package ru.nifontbus.profidevelop.model.repository
 
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.model.datasource.DataSourceLocal
 
 

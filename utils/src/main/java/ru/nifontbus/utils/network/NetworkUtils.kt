@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.utils.network
+package ru.nifontbus.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager

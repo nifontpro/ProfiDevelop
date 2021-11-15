@@ -1,6 +1,6 @@
 package ru.nifontbus.profidevelop.view.base
 
-import ru.nifontbus.profidevelop.model.data.AppState
+import ru.nifontbus.model.data.AppState
 
 // Нижний уровень. View знает о контексте и фреймворке
 interface BaseView {

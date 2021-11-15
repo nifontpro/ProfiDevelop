@@ -1,8 +1,8 @@
-package ru.nifontbus.profidevelop.utils
+package ru.nifontbus.utils
 
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
-import ru.nifontbus.profidevelop.model.data.Meanings
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
+import ru.nifontbus.model.data.Meanings
 import ru.nifontbus.profidevelop.room.HistoryEntity
 
 fun parseOnlineSearchResults(appState: AppState): AppState {

@@ -2,7 +2,7 @@ package ru.nifontbus.profidevelop.di
 
 import androidx.room.Room
 import org.koin.dsl.module
-import ru.nifontbus.profidevelop.model.data.DataModel
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.model.datasource.RetrofitImplementation
 import ru.nifontbus.profidevelop.model.datasource.RoomDataBaseImplementation
 import ru.nifontbus.profidevelop.model.repository.Repository
