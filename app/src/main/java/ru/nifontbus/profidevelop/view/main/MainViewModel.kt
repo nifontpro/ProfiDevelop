@@ -2,10 +2,10 @@ package ru.nifontbus.profidevelop.view.main
 
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.nifontbus.model.data.AppState
-import ru.nifontbus.utils.parseOnlineSearchResults
-import ru.nifontbus.core.viewmodel.BaseViewModel
+import ru.nifontbus.profidevelop.utils.parseOnlineSearchResults
 
 class MainViewModel(private val interactor: MainInteractor) :
     ru.nifontbus.core.viewmodel.BaseViewModel<AppState>() {
@@ -23,9 +23,10 @@ class MainViewModel(private val interactor: MainInteractor) :
     }
 
     //Doesn't have to use withContext for Retrofit call if you use .addCallAdapterFactory(CoroutineCallAdapterFactory()). The same goes for Room
-    private suspend fun startInteractor(word: String, isOnline: Boolean) = withContext(Dispatchers.IO) {
-        _mutableLiveData.postValue(parseOnlineSearchResults(interactor.getData(word, isOnline)))
-    }
+    private suspend fun startInteractor(word: String, isOnline: Boolean) =
+        withContext(Dispatchers.IO) {
+            _mutableLiveData.postValue(parseOnlineSearchResults(interactor.getData(word, isOnline)))
+        }
 
     override fun handleError(error: Throwable) {
         _mutableLiveData.postValue(AppState.Error(error))

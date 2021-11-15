@@ -1,9 +1,9 @@
 package ru.nifontbus.profidevelop.view.history
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.launch
 import ru.nifontbus.model.data.AppState
-import ru.nifontbus.utils.parseLocalSearchResults
-import ru.nifontbus.core.viewmodel.BaseViewModel
+import ru.nifontbus.profidevelop.utils.parseLocalSearchResults
 
 class HistoryViewModel(private val interactor: HistoryInteractor) :
     ru.nifontbus.core.viewmodel.BaseViewModel<AppState>() {

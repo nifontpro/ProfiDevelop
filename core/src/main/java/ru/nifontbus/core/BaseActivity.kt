@@ -66,7 +66,7 @@ abstract class BaseActivity<T : AppState, I : ru.nifontbus.core.viewmodel.Intera
         }
     }
 
-    private fun showNoInternetConnectionDialog() {
+    fun showNoInternetConnectionDialog() {
         showAlertDialog(
             getString(R.string.dialog_title_device_is_offline),
             getString(R.string.dialog_message_device_is_offline)
