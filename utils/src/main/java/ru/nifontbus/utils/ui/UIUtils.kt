@@ -2,7 +2,7 @@ package ru.nifontbus.utils.ui
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import ru.nifontbus.profidevelop.R
+import ru.nifontbus.utils.R
 
 fun getStubAlertDialog(context: Context): AlertDialog {
     return getAlertDialog(context, null, null)

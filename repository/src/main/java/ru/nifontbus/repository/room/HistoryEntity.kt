@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.room
+package ru.nifontbus.repository.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

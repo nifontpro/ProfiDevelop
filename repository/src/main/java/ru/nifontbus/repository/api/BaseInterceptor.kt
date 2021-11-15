@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.model.datasource
+package ru.nifontbus.repository.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

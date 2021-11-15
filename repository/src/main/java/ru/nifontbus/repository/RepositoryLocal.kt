@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.model.repository
+package ru.nifontbus.repository
 
 import ru.nifontbus.model.data.AppState
 

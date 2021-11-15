@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.room
+package ru.nifontbus.repository.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

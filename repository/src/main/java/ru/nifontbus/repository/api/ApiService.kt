@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.model.datasource
+package ru.nifontbus.repository.api
 
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET

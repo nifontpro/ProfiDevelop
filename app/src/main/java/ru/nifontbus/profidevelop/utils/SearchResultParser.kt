@@ -1,9 +1,8 @@
-package ru.nifontbus.utils
+package ru.nifontbus.profidevelop.utils
 
 import ru.nifontbus.model.data.AppState
 import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.model.data.Meanings
-import ru.nifontbus.profidevelop.room.HistoryEntity
 
 fun parseOnlineSearchResults(appState: AppState): AppState {
     return AppState.Success(mapResult(appState, true))
@@ -58,31 +57,6 @@ private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<Dat
         }
     }
 }
-
-fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): List<DataModel> {
-    val searchResult = ArrayList<DataModel>()
-    if (!list.isNullOrEmpty()) {
-        for (entity in list) {
-            searchResult.add(DataModel(entity.word, null))
-        }
-    }
-    return searchResult
-}
-
-fun convertDataModelSuccessToEntity(appState: AppState): HistoryEntity? {
-    return when (appState) {
-        is AppState.Success -> {
-            val searchResult = appState.data
-            if (searchResult.isNullOrEmpty() || searchResult[0].text.isNullOrEmpty()) {
-                null
-            } else {
-                HistoryEntity(searchResult[0].text!!, null)
-            }
-        }
-        else -> null
-    }
-}
-
 
 fun convertMeaningsToString(meanings: List<Meanings>): String {
     var meaningsSeparatedByComma = String()

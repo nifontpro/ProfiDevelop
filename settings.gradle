@@ -9,3 +9,4 @@ rootProject.name = "ProfiDevelop"
 include ':app'
 include ':model'
 include ':utils'
+include ':repository'

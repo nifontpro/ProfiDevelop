@@ -1,8 +1,7 @@
-package ru.nifontbus.profidevelop.model.repository
+package ru.nifontbus.repository
 
 import ru.nifontbus.model.data.AppState
 import ru.nifontbus.model.data.DataModel
-import ru.nifontbus.profidevelop.model.datasource.DataSourceLocal
 
 
 class RepositoryImplementationLocal(private val dataSource: DataSourceLocal<List<DataModel>>) :

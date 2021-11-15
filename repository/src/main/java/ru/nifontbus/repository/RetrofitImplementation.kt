@@ -1,4 +1,4 @@
-package ru.nifontbus.profidevelop.model.datasource
+package ru.nifontbus.repository
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -11,11 +11,11 @@ import ru.nifontbus.model.data.DataModel
 class RetrofitImplementation : DataSource<List<DataModel>> {
 
     override suspend fun getData(word: String): List<DataModel> {
-        return getService(BaseInterceptor.interceptor).searchAsync(word).await()
+        return getService(ru.nifontbus.repository.api.BaseInterceptor.interceptor).searchAsync(word).await()
     }
 
-    private fun getService(interceptor: Interceptor): ApiService {
-        return createRetrofit(interceptor).create(ApiService::class.java)
+    private fun getService(interceptor: Interceptor): ru.nifontbus.repository.api.ApiService {
+        return createRetrofit(interceptor).create(ru.nifontbus.repository.api.ApiService::class.java)
     }
 
     private fun createRetrofit(interceptor: Interceptor): Retrofit {

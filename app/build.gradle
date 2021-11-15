@@ -13,6 +13,7 @@ dependencies {
     implementation Design.material
     implementation Design.constraintLayout
     implementation Design.swiperefreshLayout
+    implementation project(path: ':repository')
 
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.runner
