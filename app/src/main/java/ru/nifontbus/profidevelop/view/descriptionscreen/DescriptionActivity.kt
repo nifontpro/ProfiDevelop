@@ -11,7 +11,7 @@ import coil.request.ImageRequest
 import geekbrains.ru.translator.utils.ui.AlertDialogFragment
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityDescriptionBinding
-import ru.nifontbus.utils.network.isOnline
+import ru.nifontbus.utils.network.OnlineLiveData
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -56,18 +56,22 @@ class DescriptionActivity : AppCompatActivity() {
     }
 
     private fun startLoadingOrShowError() {
-        if (isOnline(applicationContext)) {
-            setData()
-        } else {
-            AlertDialogFragment.newInstance(
-                getString(R.string.dialog_title_device_is_offline),
-                getString(R.string.dialog_message_device_is_offline)
-            ).show(
-                supportFragmentManager,
-                DIALOG_FRAGMENT_TAG
-            )
-            stopRefreshAnimationIfNeeded()
-        }
+        OnlineLiveData(this).observe(this@DescriptionActivity,
+            {
+                if (it) {
+                    setData()
+                } else {
+                    AlertDialogFragment.newInstance(
+                        getString(R.string.dialog_title_device_is_offline),
+                        getString(R.string.dialog_message_device_is_offline)
+                    ).show(
+                        supportFragmentManager,
+                        DIALOG_FRAGMENT_TAG
+                    )
+                    stopRefreshAnimationIfNeeded()
+                }
+            })
+
     }
 
     private fun stopRefreshAnimationIfNeeded() {
@@ -77,7 +81,6 @@ class DescriptionActivity : AppCompatActivity() {
     }
 
     private fun useCoilToLoadPhoto(imageView: ImageView, imageLink: String) {
-//        val request = LoadRequest.Builder(this)
         val request = ImageRequest.Builder(this)
             .data("https:$imageLink")
             .target(
@@ -94,7 +97,6 @@ class DescriptionActivity : AppCompatActivity() {
             //)
             .build()
 
-//        ImageLoader(this).execute(request)
         val imageLoader = ImageLoader(this)
         imageLoader.enqueue(request)
     }

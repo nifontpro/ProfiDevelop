@@ -27,7 +27,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
     private val searchFab by viewById<FloatingActionButton>(R.id.search_fab)
 
-
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
@@ -53,7 +52,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
         object : SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                isNetworkAvailable = isOnline(applicationContext)
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
                 } else {
