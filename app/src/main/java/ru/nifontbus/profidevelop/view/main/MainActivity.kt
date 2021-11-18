@@ -2,21 +2,20 @@ package ru.nifontbus.profidevelop.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.nifontbus.core.BaseActivity
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityMainBinding
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
 import ru.nifontbus.profidevelop.utils.convertMeaningsToString
-import ru.nifontbus.profidevelop.utils.network.isOnline
-import ru.nifontbus.profidevelop.view.base.BaseActivity
 import ru.nifontbus.profidevelop.view.descriptionscreen.DescriptionActivity
 import ru.nifontbus.profidevelop.view.history.HistoryActivity
 import ru.nifontbus.profidevelop.view.main.adapter.MainAdapter
+import ru.nifontbus.utils.network.isOnline
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 
@@ -39,7 +38,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                         this@MainActivity,
                         data.text!!,
                         convertMeaningsToString(data.meanings!!),
-                        data.meanings[0].imageUrl
+                        data.meanings!![0].imageUrl
                     )
                 )
             }

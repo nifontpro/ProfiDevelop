@@ -1,15 +1,11 @@
 package ru.nifontbus.profidevelop.view.history
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.nifontbus.core.BaseActivity
+import ru.nifontbus.model.data.AppState
+import ru.nifontbus.model.data.DataModel
 import ru.nifontbus.profidevelop.databinding.ActivityHistoryBinding
-import ru.nifontbus.profidevelop.model.data.AppState
-import ru.nifontbus.profidevelop.model.data.DataModel
-import ru.nifontbus.profidevelop.view.base.BaseActivity
-import ru.nifontbus.profidevelop.view.history.HistoryAdapter
-import ru.nifontbus.profidevelop.view.history.HistoryInteractor
-import ru.nifontbus.profidevelop.view.history.HistoryViewModel
 
 class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
 
@@ -41,7 +37,7 @@ class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
         }
         val viewModel: HistoryViewModel by viewModel()
         model = viewModel
-        model.subscribe().observe(this@HistoryActivity, Observer<AppState> { renderData(it) })
+        model.subscribe().observe(this@HistoryActivity, { renderData(it) })
     }
 
     private fun initViews() {

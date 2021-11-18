@@ -11,7 +11,7 @@ import coil.request.ImageRequest
 import geekbrains.ru.translator.utils.ui.AlertDialogFragment
 import ru.nifontbus.profidevelop.R
 import ru.nifontbus.profidevelop.databinding.ActivityDescriptionBinding
-import ru.nifontbus.profidevelop.utils.network.isOnline
+import ru.nifontbus.utils.network.isOnline
 
 class DescriptionActivity : AppCompatActivity() {
 
