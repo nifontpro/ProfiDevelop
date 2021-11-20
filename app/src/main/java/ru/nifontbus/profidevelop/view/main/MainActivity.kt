@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.nifontbus.core.BaseActivity
 import ru.nifontbus.model.data.AppState
@@ -16,10 +18,14 @@ import ru.nifontbus.profidevelop.view.descriptionscreen.DescriptionActivity
 import ru.nifontbus.profidevelop.view.history.HistoryActivity
 import ru.nifontbus.profidevelop.view.main.adapter.MainAdapter
 import ru.nifontbus.utils.network.isOnline
+import ru.nifontbus.utils.ui.viewById
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
+
+    private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
+    private val searchFab by viewById<FloatingActionButton>(R.id.search_fab)
 
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
@@ -46,7 +52,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
         object : SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
-                isNetworkAvailable = isOnline(applicationContext)
                 if (isNetworkAvailable) {
                     model.getData(searchWord, isNetworkAvailable)
                 } else {
@@ -84,17 +89,16 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     }
 
     private fun iniViewModel() {
-        if (binding.mainActivityRecyclerview.adapter != null) {
+        if (mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
         val viewModel: MainViewModel by viewModel()
-//        val viewModel: MainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         model = viewModel
         model.subscribe().observe(this@MainActivity, { renderData(it) })
     }
 
     private fun initViews() {
-        binding.searchFab.setOnClickListener(fabClickListener)
-        binding.mainActivityRecyclerview.adapter = adapter
+        searchFab.setOnClickListener(fabClickListener)
+        mainActivityRecyclerview.adapter = adapter
     }
 }
